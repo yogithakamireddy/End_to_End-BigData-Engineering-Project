@@ -6,3 +6,5 @@ Pre-Requisites
 
 Architechure of the project
 
+Dataset from kaggle 
+https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce/data?select=olist_orders_dataset.csv
