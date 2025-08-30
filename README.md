@@ -13,6 +13,8 @@ Dataset from kaggle is downloaded and loaded into Github
 
 created/Hosted one MySQL and one NoSQL(Mongo DB) databases in filess.io webserver
 
-loading data from github to the MySQL Database
+loading data to the MySQL Database USING python pandas code
+
+
 
 
