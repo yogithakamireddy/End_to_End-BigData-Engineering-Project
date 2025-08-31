@@ -39,7 +39,7 @@ Domain: Ecommerce Data
 3. Created a Lookup activity in ADF:
    - Reads the JSON configuration file from GitHub
    - Fetches values like `relative_url` and `file_name`
-   - JSON file Link: 
+   [ JSON file Link: https://github.com/yogithakamireddy/End_to_End-BigData-Engineering-Project/blob/main/ForEachInput.json ]
      
 4. ForEach Activity (GitHub Data Ingestion)
    - Iterates over the JSON values from Lookup activity  
@@ -62,6 +62,8 @@ Domain: Ecommerce Data
 	"file_name":"olist_geolocation_dataset.csv"
 	}
 ]
+
+<img width="791" height="523" alt="image" src="https://github.com/user-attachments/assets/4fc143a5-1bb6-497d-bd1f-9950260ec15e" />
 
 **Data Transformation:**
 used Azure databricks: Spark powered, integrated with Azure, Handles big data easily, Great for Machine learning
