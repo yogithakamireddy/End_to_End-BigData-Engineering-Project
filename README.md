@@ -1,30 +1,68 @@
 # End_to_End-BigData-Engineering-Project
-Ecommerce Data [very good type of data for analyzing]
+
 Pre-Requisites
 1. Python and SQL
 2. Azure free account($200 free credit)
 
-Architechure of the project
+**Architechure of the project**
 
 <img width="1339" height="736" alt="image" src="https://github.com/user-attachments/assets/73dfeaf7-2ff5-42d7-a6f3-04132de0313b" />
 
+**Dataset:**
+Domain: Ecommerce Data
+1. Download the data from Kaggle(Link: https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce/data?select=olist_orders_dataset.csv)
+2. Push the files into github repository
+3. Created MySQL and MongoDB databases(Hosted them on cloud using Filess.io)
+4. Established cloud connections using python connectors
+5. Loaded structured data into MySQL and semi structured data into MongoDB
 
-Dataset from kaggle 
-https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce/data?select=olist_orders_dataset.csv
+## DataIngestion:
 
-Dataset from kaggle is downloaded and loaded into Github(data in HTTP)
+### Service Used
+- Azure Data Factory(ADF)
+- Azure Data Lake Storage (ADLS Gen2)
 
-created/Hosted one MySQL and one NoSQL(Mongo DB) databases in filess.io webserver
+### Steps Followed
 
-loading data to the MySQL Database USING python pandas code(data in SQL table)
+1. Configured Azure Data Lake Storage:
+   - Created a **Storage Account**  
+   - **Enabled Hierarchical Namespace (HNS)** during setup (required for ADLS Gen2)  
+   - Created container with folders:  
+     - `bronze/` → raw data  
+     - `silver/` → transformed/cleaned data  
+     - `gold/` → final curated data
+       
+2. Connected ADF with data sources:
+   - HTTP connection -> GitHub(to fetch raw files)
+   - MySQL connection -> MySQL cloud database (to fetch data from MySQL cloud server)
+     
+3. Created a Lookup activity in ADF:
+   - Reads the JSON configuration file from GitHub
+   - Fetches values like `relative_url` and `file_name`
+   - JSON file Link: 
+     
+4. ForEach Activity (GitHub Data Ingestion)
+   - Iterates over the JSON values from Lookup activity  
+   - Copy Activity inside ForEach:  
+     - Copies each file from GitHub into ADLS – Bronze folder 
 
-Now load data into Azure data lake from github(http) and SQL table (http)
+5. Copy Activity (MySQL Data Ingestion)
+   - After ForEach activity, copies data from MySQL cloud database
+   - Loads data into ADLS – Bronze folder using parameterized values
+  
+  
+### JSON Configuration Example
+[
+	{
+	"csv_relative_url":"End_to_End-BigData-Engineering-Project/refs/heads/main/data/olist_customers_dataset.csv",
+	"file_name":"olist_customers_dataset.csv"
+	},
+	{
+	"csv_relative_url":"End_to_End-BigData-Engineering-Project/refs/heads/main/data/olist_geolocation_dataset.csv",
+	"file_name":"olist_geolocation_dataset.csv"
+	}
+]
 
-**Data Ingestion:**
-used Azure Data Factory(ADF) with HTTP and a SQL server
-Parametriozation
-For each activity
-Lookup
 **Data Transformation:**
 used Azure databricks: Spark powered, integrated with Azure, Handles big data easily, Great for Machine learning
 Azure databricks workflow:
