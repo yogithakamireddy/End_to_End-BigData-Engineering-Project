@@ -15,7 +15,13 @@ created/Hosted one MySQL and one NoSQL(Mongo DB) databases in filess.io webserve
 
 loading data to the MySQL Database USING python pandas code(data in SQL table)
 
-Now load data into Azure data lake
+Now load data into Azure data lake from github(http) and SQL table (http)
+
+**Data Ingestion:**
+used Azure Data Factory(ADF) with HTTP and a SQL server
+Parametriozation
+For each activity
+Lookup
 
 
 
