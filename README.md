@@ -18,7 +18,7 @@ Domain: Ecommerce Data
 
 ## DataIngestion:
 
-### Service Used
+### Services Used
 - Azure Data Factory(ADF)
 - Azure Data Lake Storage (ADLS Gen2)
 
@@ -71,6 +71,8 @@ Azure databricks workflow:
 read data from ADLS
 read data from NoSQL (mongoDB)
 
+
+**Challenges Faced:**
 
 
 
