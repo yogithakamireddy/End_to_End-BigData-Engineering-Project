@@ -1,5 +1,9 @@
 [
 	{
+	"csv_relative_url":"End_to_End-BigData-Engineering-Project/refs/heads/main/data/olist_order_reviews_dataset.csv",
+	"file_name":"olist_order_reviews_dataset.csv"
+	},
+	{
 	"csv_relative_url":"End_to_End-BigData-Engineering-Project/refs/heads/main/data/olist_customers_dataset.csv",
 	"file_name":"olist_customers_dataset.csv"
 	},
