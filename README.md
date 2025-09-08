@@ -73,8 +73,35 @@ read data from NoSQL (mongoDB)
 
 
 **Challenges Faced:**
+### 1. CSV Ingestion Failure (Extra Commas)
+**Error:**
+	ErrorCode=DelimitedTextMoreColumnsThanDefined,'Type=Microsoft.DataTransfer.Common.Shared.HybridDeliveryException,
+	Message=Error found when processing 'olist_order_reviews_dataset.csv' with row number 1587: found more columns 
+	than expected column count 7.
+**Cause:** Extra commas inside text fields
+**✅ Solution:** In ADF DelimitedText dataset, configured:
+	Column delimiter → ,
+	Row delimiter → \n
+	Quote character → "
+	Escape character → \
+	(Resolved with help from ChatGPT)
 
+### 2. Databricks Compute Not Available in Region
+Issue: Selected compute type was unavailable in chosen region
+✅ Solution: Used Databricks AI Playground to identify a supported compute SKU for the subscription and region
 
+### 3. Synapse Access to ADLS Silver Layer
+**Error:**
+Content of directory on path 'https://ecommolistdatastorage.dfs.core.windows.net/olistdata/silver/' cannot be listed.
+**Cause:** Insufficient permissions
+**✅ Solution:**
+	- Created security group in Microsoft Entra ID
+	- Added self as member
+	- Granted Storage Blob Data Contributor role
+	(Resolved with help from Stack Overflow & ChatGPT)
 
-
-
+### Results and key outcomes:
+1. Successfully implemented end-to-end big data pipeline in Azure
+2. Achieved structured data processing with Medallion Architecture
+3. Enabled real-time querying through Synapse
+4. Built scalable foundation for Power BI dashboards
