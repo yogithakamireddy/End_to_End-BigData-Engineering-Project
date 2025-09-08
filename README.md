@@ -73,7 +73,7 @@ read data from NoSQL (mongoDB)
 
 
 **Challenges Faced:**
-### 1. CSV Ingestion Failure (Extra Commas)
+#### 1. CSV Ingestion Failure (Extra Commas)
 **Error:**
 	ErrorCode=DelimitedTextMoreColumnsThanDefined,'Type=Microsoft.DataTransfer.Common.Shared.HybridDeliveryException,
 	Message=Error found when processing 'olist_order_reviews_dataset.csv' with row number 1587: found more columns 
@@ -86,11 +86,11 @@ read data from NoSQL (mongoDB)
 	Escape character → \
 	(Resolved with help from ChatGPT)
 
-### 2. Databricks Compute Not Available in Region
+#### 2. Databricks Compute Not Available in Region
 Issue: Selected compute type was unavailable in chosen region
 ✅ Solution: Used Databricks AI Playground to identify a supported compute SKU for the subscription and region
 
-### 3. Synapse Access to ADLS Silver Layer
+#### 3. Synapse Access to ADLS Silver Layer
 **Error:**
 Content of directory on path 'https://ecommolistdatastorage.dfs.core.windows.net/olistdata/silver/' cannot be listed.
 **Cause:** Insufficient permissions
