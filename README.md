@@ -16,13 +16,13 @@ Domain: Ecommerce Data
 4. Established cloud connections using python connectors
 5. Loaded structured data into MySQL and semi structured data into MongoDB
 
-## DataIngestion:
+### 1. DataIngestion:
 
-### Services Used
+### 1.1 Services Used
 - Azure Data Factory(ADF)
 - Azure Data Lake Storage (ADLS Gen2)
 
-### Steps Followed
+### 1.2 Steps Followed
 
 1. Configured Azure Data Lake Storage:
    - Created a **Storage Account**  
@@ -65,14 +65,64 @@ Domain: Ecommerce Data
 
 <img width="791" height="523" alt="image" src="https://github.com/user-attachments/assets/4fc143a5-1bb6-497d-bd1f-9950260ec15e" />
 
-**Data Transformation:**
-used Azure databricks: Spark powered, integrated with Azure, Handles big data easily, Great for Machine learning
-Azure databricks workflow:
-read data from ADLS
-read data from NoSQL (mongoDB)
+### 2. Data Transformation
 
+### 2.1 Services Used
+- Azure databricks: Spark powered, integrated with Azure, Handles big data easily, Great for Machine learning
+- Azure Data Lake Storage (ADLS)
+- MongoDB (Cloud NoSQL Database)
+- 
+### 2.2 Steps Followed
+1. **Connected Databricks to Data Sources**
+   - Established a secure connection between **Databricks and ADLS** using service principal credentials
+   - Connected Databricks to **MongoDB (NoSQL)** for additional datasets
 
+2. **Loaded Data into PySpark DataFrames**
+   - Fetched raw data from **Bronze layer (ADLS)**
+   - Imported NoSQL data from **MongoDB**
+   - Converted both sources into PySpark DataFrames for processing
+
+3. **Applied Data Cleaning & Transformations**
+   - Removed duplicates and null values
+   - Standardized schema and column names
+   - Applied necessary business rules
+
+4. **Joined Relational + NoSQL Data**
+   - Performed joins between **Bronze layer data (CSV/MySQL sources)** and **MongoDB collections**
+   - Built a unified schema for downstream analysis
+
+5. **Wrote Transformed Data to Silver Layer**
+   - Stored the cleaned and enriched data into **ADLS Silver container**
+   - Ensured partitioning and optimized storage formats (e.g., Parquet) for performance
+
+### 3. Data Loading / Serving
+
+#### 3.1 Services Used
+- Azure Synapse Analytics (Serverless SQL Pool)
+- Azure Data Lake Storage (ADLS)
+
+#### 3.2 Steps Followed
+1. **Established Synapse–ADLS Connection**
+   - Configured Synapse Analytics to connect with **ADLS Silver layer**
+   - Granted necessary permissions (Storage Blob Data Contributor role via Microsoft Entra ID)
+
+2. **Queried Data from Silver Layer**
+   - Used **serverless SQL pool** in Synapse Analytics
+   - Executed SQL scripts to query Parquet files from the Silver container
+   - Created **views** for simplified querying
+
+3. **Created External Tables in Gold Layer**
+   - Defined external tables on top of ADLS data
+   - Transformed data into curated **Gold layer**  
+   - Stored in **Parquet format** (optimized for analytics)
+
+4. **Prepared Data for Analytics**
+   - Final curated Gold layer tables made available for:
+     - Power BI dashboards
+     - Advanced analytics queries
+    
 **Challenges Faced:**
+
 #### 1. CSV Ingestion Failure (Extra Commas)
 **Error:**
 	ErrorCode=DelimitedTextMoreColumnsThanDefined,'Type=Microsoft.DataTransfer.Common.Shared.HybridDeliveryException,
